@@ -1,0 +1,76 @@
+
+==================
+Data Normalization
+==================
+Normalization refers to rescaling real valued numeric attributes into the range 0 and 1.
+It is useful to scale the input attributes for a model that relies on the magnitude of values, such as distance measures used in k-nearest neighbors and in the preparation of coefficients in regression.
+
+Here our data Z is rescaled such that any specific z will now be 0 ≤ z ≤ 1, and is done through this formula:
+	z = ((x - mean(x))/(max(x) - min(x)))
+
+#################################################
+from sklearn.datasets import load_iris
+from sklearn import preprocessing
+# load the iris dataset
+iris = load_iris()
+print(iris.data.shape)
+# separate the data from the target attributes
+X = iris.data
+y = iris.target
+# normalize the data attributes
+normalized_X = preprocessing.normalize(X)
+#################################################
+
+Normalization makes training less sensitive to the scale of features, so we can better solve for coefficients.
+The use of a normalization method will improve analysis from multiple models.
+Normalizing will ensure that a convergence problem does not have a massive variance, making optimization feasible.
+
+The data provided is proportional so normalizing might not provide correct estimators.
+Or the scale between our data features does matters so we want to keep in our dataset. 
+We need to think about our data, and understand if the transformations we are applying are in line with the outcomes we are searching for.
+
+Keep in mind, there is some debate stating it is better to have the input values centred around 0 — standardization — rather than between 0 and 1.
+So doing our research is important as well, so we understand what type of data is needed by our model.
+
+
+
+====================
+Data Standardization
+====================
+Standardization refers to shifting the distribution of each attribute to have a mean of zero and a standard deviation of one (unit variance).
+It is useful to standardize attributes for a model that relies on the distribution of attributes such as Gaussian processes.
+
+Here is the formula for standardization:
+	z = ((X - mean(X))/std(X))
+
+#################################################
+# Standardize the data attributes for the Iris dataset.
+from sklearn.datasets import load_iris
+from sklearn import preprocessing
+
+# load the Iris dataset
+iris = load_iris()
+print(iris.data.shape)
+
+# separate the data and target attributes
+X = iris.data
+y = iris.target
+
+# standardize the data attributes
+standardized_X = preprocessing.scale(X)
+#################################################
+
+Standardizing tends to make the training process well behaved because the numerical condition of the optimization problems is improved.
+Compare features that have different units or scales.
+
+Data rescaling is an important part of data preparation before applying machine learning algorithms.
+
+
+
+
+
+
+
+
+
+
