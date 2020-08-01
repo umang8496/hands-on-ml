@@ -67,10 +67,75 @@ Data rescaling is an important part of data preparation before applying machine 
 
 
 
+================
+Gradient Descent
+================
+It is an optimization algorithm used to minimize some function by iteratively moving in the direction of steepest descent as defined by the negative of the gradient.
+In simple words it helps us to find a local minima in any function.
+
+There are two methods to find local minima
+--> Differentiation
+--> Iteration (Gradient Descent)
+
+How Gradient Descent Works.
+	Repeat until convergence of {
+		theta(i) := theta(i) - alpha * (derivative of J wrt theta)
+	}
+	where
+		J is the cost function for the existing model, and
+		alpha is the learning rate for the gradient descent algorithm,
+		theta is the number of independent variables or features around which we are framing our model.
+
+It's very simple as formula suggest we can take any random point x and update it with the help of learning rate(α) and slope of curve at this point.
+
+Learning Rate (alpha) is a step size that we will take to move in the direction of local minima and we can also see that while we are approaching minima our step size is constantly decrease.
+Some of us think that we did it manually but this is the effect of slope when we go down then our slope is constantly decrease because of this our update in x which is directly influenced by the multiplication of learning rate and slope is also decrease.
 
 
 
+=============================================================
+Univariate Linear Regression follows the following procedures
+=============================================================
+01. Since we have an independent variable (X) which is a matrix of Nx1, we need to frame such an equation of line which satifies all the existing observations with minimum possible error and also predicts the outcome for unknown or testing data.
 
+02. Now add another column to the matix X with all the values as 1.
+	This will give us a matix of dimension Nx2.
 
+03. Now guess two random variables for our initial model.
+	Here, b0 and b1 are those random variables.
+	SO the equation of the line would look something like this:  Y_prediction = b0*X[0] + b1*X[1]
+
+04. Now lets predict our first prediction-model.
+	pred = numpy.dot(X, theta)
+	where
+		pred, X and theta are the matrices of dimentions (Nx1), (Nx2) and (2x1)
+		numpy.dot() would return a dot product of two matrices.
+
+05. We will calculate the ERROR corresponding to the our obtained model.
+	It is given by
+		ERROR = Y_observed - Y_predicted
+		where
+			ERROR, Y_observed and Y_predicted are the matrices having dimensions of Nx1 each.
+
+06. Lets compute the Cost Function (J). This is measure of how good our model is or how well our model fits into the training data.
+	It is given by
+		J = ((1/2N) * Sum-of-all(ERROR*ERROR))
+		where
+			N is the total number of observations being used to tarin the model.
+	It is also known as Root Mean Squared Error (RMSE).
+	We can compute this by using the following notion:
+		cost = (1/2N) * numpy.dot(ERROR.T, ERROR)
+		where
+			ERROR.T is the transpose matrix of ERROR matrix.
+
+07. Now we will update the theta through the following equation for minimizing our cost function and hence improving our prediction-model.
+	It is done through the following equation:
+		theta := theta - ((alpha) * (1/2N) * sum-of-all(ERROR * X))
+	We can compute this using the following notion:
+		theta = theta - (alpha * (1/2M) *numpy.dot(X.T, ERROR))
+
+08. Repeat till the change in cost function becomes negligible.
+
+09. The final values for theta or b0 and b1 are the value which best define our regression for our model.
 
 
