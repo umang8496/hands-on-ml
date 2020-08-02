@@ -1,4 +1,21 @@
 
+===============
+Feature Scaling
+===============
+We can speed up gradient descent by having each of our input values in roughly the same range.
+This is because θ will descend quickly on small ranges and slowly on large ranges, and so will oscillate inefficiently down to the optimum when the variables are very uneven.
+
+The way to prevent this is to modify the ranges of our input variables so that they are all roughly the same.
+Ideally: -1 <= x(i) <= +1
+Get every feature into approx a range of -1 to +1.
+Generally a feature of range -3 to +3 is considered to be fine.
+
+Two techniques to help with this are feature scaling and mean normalization.
+Feature scaling involves dividing the input values by the range of the input variable, resulting in a new range of just 1.
+Mean normalization involves subtracting the average value for an input variable from the values for that input variable resulting in a new average value for the input variable of just zero.
+
+
+
 ==================
 Data Normalization
 ==================
@@ -90,6 +107,9 @@ It's very simple as formula suggest we can take any random point x and update it
 
 Learning Rate (alpha) is a step size that we will take to move in the direction of local minima and we can also see that while we are approaching minima our step size is constantly decrease.
 Some of us think that we did it manually but this is the effect of slope when we go down then our slope is constantly decrease because of this our update in x which is directly influenced by the multiplication of learning rate and slope is also decrease.
+
+Note: 	If the learning rate is too small, then Cost-Function will have a slow convergence.
+		And if the learning rate is too large, then Cost-Function may not converge.
 
 
 
