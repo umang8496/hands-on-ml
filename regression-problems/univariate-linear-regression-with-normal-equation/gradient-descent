@@ -1,0 +1,187 @@
+
+===============
+Feature Scaling
+===============
+We can speed up gradient descent by having each of our input values in roughly the same range.
+This is because θ will descend quickly on small ranges and slowly on large ranges, and so will oscillate inefficiently down to the optimum when the variables are very uneven.
+
+The way to prevent this is to modify the ranges of our input variables so that they are all roughly the same.
+Ideally: -1 <= x(i) <= +1
+Get every feature into approx a range of -1 to +1.
+Generally a feature of range -3 to +3 is considered to be fine.
+
+Two techniques to help with this are feature scaling and mean normalization.
+Feature scaling involves dividing the input values by the range of the input variable, resulting in a new range of just 1.
+Mean normalization involves subtracting the average value for an input variable from the values for that input variable resulting in a new average value for the input variable of just zero.
+
+
+
+==================
+Data Normalization
+==================
+Normalization refers to rescaling real valued numeric attributes into the range 0 and 1.
+It is useful to scale the input attributes for a model that relies on the magnitude of values, such as distance measures used in k-nearest neighbors and in the preparation of coefficients in regression.
+
+Here our data Z is rescaled such that any specific z will now be 0 ≤ z ≤ 1, and is done through this formula:
+	z = ((x - mean(x))/(max(x) - min(x)))
+
+#################################################
+from sklearn.datasets import load_iris
+from sklearn import preprocessing
+# load the iris dataset
+iris = load_iris()
+print(iris.data.shape)
+# separate the data from the target attributes
+X = iris.data
+y = iris.target
+# normalize the data attributes
+normalized_X = preprocessing.normalize(X)
+#################################################
+
+Normalization makes training less sensitive to the scale of features, so we can better solve for coefficients.
+The use of a normalization method will improve analysis from multiple models.
+Normalizing will ensure that a convergence problem does not have a massive variance, making optimization feasible.
+
+The data provided is proportional so normalizing might not provide correct estimators.
+Or the scale between our data features does matters so we want to keep in our dataset. 
+We need to think about our data, and understand if the transformations we are applying are in line with the outcomes we are searching for.
+
+Keep in mind, there is some debate stating it is better to have the input values centred around 0 — standardization — rather than between 0 and 1.
+So doing our research is important as well, so we understand what type of data is needed by our model.
+
+
+
+====================
+Data Standardization
+====================
+Standardization refers to shifting the distribution of each attribute to have a mean of zero and a standard deviation of one (unit variance).
+It is useful to standardize attributes for a model that relies on the distribution of attributes such as Gaussian processes.
+
+Here is the formula for standardization:
+	z = ((X - mean(X))/std(X))
+
+#################################################
+# Standardize the data attributes for the Iris dataset.
+from sklearn.datasets import load_iris
+from sklearn import preprocessing
+
+# load the Iris dataset
+iris = load_iris()
+print(iris.data.shape)
+
+# separate the data and target attributes
+X = iris.data
+y = iris.target
+
+# standardize the data attributes
+standardized_X = preprocessing.scale(X)
+#################################################
+
+Standardizing tends to make the training process well behaved because the numerical condition of the optimization problems is improved.
+Compare features that have different units or scales.
+
+Data rescaling is an important part of data preparation before applying machine learning algorithms.
+
+
+
+================
+Gradient Descent
+================
+It is an optimization algorithm used to minimize some function by iteratively moving in the direction of steepest descent as defined by the negative of the gradient.
+In simple words it helps us to find a local minima in any function.
+
+There are two methods to find local minima
+--> Differentiation
+--> Iteration (Gradient Descent)
+
+How Gradient Descent Works.
+	Repeat until convergence of {
+		theta(i) := theta(i) - alpha * (derivative of J wrt theta)
+	}
+	where
+		J is the cost function for the existing model, and
+		alpha is the learning rate for the gradient descent algorithm,
+		theta is the number of independent variables or features around which we are framing our model.
+
+It's very simple as formula suggest we can take any random point x and update it with the help of learning rate(α) and slope of curve at this point.
+
+Learning Rate (alpha) is a step size that we will take to move in the direction of local minima and we can also see that while we are approaching minima our step size is constantly decrease.
+Some of us think that we did it manually but this is the effect of slope when we go down then our slope is constantly decrease because of this our update in x which is directly influenced by the multiplication of learning rate and slope is also decrease.
+
+Note: 	If the learning rate is too small, then Cost-Function will have a slow convergence.
+		And if the learning rate is too large, then Cost-Function may not converge.
+
+
+
+========================
+Normal Equation Approach
+========================
+Gradient descent gives one way of minimizing J.
+There is another approach where we perform the minimization explicitly and without resorting to an iterative algorithm.
+
+In the "Normal Equation" method, we will minimize J by explicitly taking its derivatives with respect to the θj ’s, and setting them to zero.
+This allows us to find the optimum theta without iteration.
+The normal equation formula is given by : theta = [inv(X' * X) * (X'*Y)]
+There is no need to do feature scaling with the normal equation.
+
+With the normal equation, computing the inversion has complexity O(n^3).
+So if we have a very large number of features, the normal equation will be slow.
+In practice, when n exceeds 10,000 it might be a good time to go from a normal solution to an iterative process.
+
+When implementing the normal equation in octave we want to use the 'pinv' function rather than 'inv.'
+The 'pinv' function will give you a value of theta even if (X'*X) is not invertible.
+
+If (X'*X) is noninvertible, the common causes might be having :
+	Redundant features, where two features are very closely related (i.e. they are linearly dependent)
+	Too many features (e.g. m ≤ n). In this case, delete some features or use "regularization".
+
+Solutions to the above problems include deleting a feature that is linearly dependent with another or deleting one or more features when there are too many features.
+
+
+
+=============================================================
+Univariate Linear Regression follows the following procedures
+=============================================================
+01. Since we have an independent variable (X) which is a matrix of Nx1, we need to frame such an equation of line which satifies all the existing observations with minimum possible error and also predicts the outcome for unknown or testing data.
+
+02. Now add another column to the matix X with all the values as 1.
+	This will give us a matix of dimension Nx2.
+
+03. Now guess two random variables for our initial model.
+	Here, b0 and b1 are those random variables.
+	SO the equation of the line would look something like this:  Y_prediction = b0*X[0] + b1*X[1]
+
+04. Now lets predict our first prediction-model.
+	pred = numpy.dot(X, theta)
+	where
+		pred, X and theta are the matrices of dimentions (Nx1), (Nx2) and (2x1)
+		numpy.dot() would return a dot product of two matrices.
+
+05. We will calculate the ERROR corresponding to the our obtained model.
+	It is given by
+		ERROR = Y_observed - Y_predicted
+		where
+			ERROR, Y_observed and Y_predicted are the matrices having dimensions of Nx1 each.
+
+06. Lets compute the Cost Function (J). This is measure of how good our model is or how well our model fits into the training data.
+	It is given by
+		J = ((1/2N) * Sum-of-all(ERROR*ERROR))
+		where
+			N is the total number of observations being used to tarin the model.
+	It is also known as Root Mean Squared Error (RMSE).
+	We can compute this by using the following notion:
+		cost = (1/2N) * numpy.dot(ERROR.T, ERROR)
+		where
+			ERROR.T is the transpose matrix of ERROR matrix.
+
+07. Now we will update the theta through the following equation for minimizing our cost function and hence improving our prediction-model.
+	It is done through the following equation:
+		theta := theta - ((alpha) * (1/2N) * sum-of-all(ERROR * X))
+	We can compute this using the following notion:
+		theta = theta - (alpha * (1/2M) *numpy.dot(X.T, ERROR))
+
+08. Repeat till the change in cost function becomes negligible.
+
+09. The final values for theta or b0 and b1 are the value which best define our regression for our model.
+
+
