@@ -1,0 +1,115 @@
+
+=================
+Bias and Variance
+=================
+The risk in following ML models is they could be based on false assumptions and skewed by noise and outliers.
+That could lead to making bad predictions.
+That is why ML cannot be a black box. The user must understand the data and algorithms if the models are to be trusted.
+
+Supervised machine learning algorithms can best be understood through the lens of the bias-variance trade-off.
+The inability of a machine learning method to capture the true relationship between features and labels is called bias.
+The difference in the fits, for a machine learning method, between different datasets is called variance.
+
+Whenever we discuss model prediction, it’s important to understand prediction errors (bias and variance).
+There is a tradeoff between a model’s ability to minimize bias and variance.
+Gaining a proper understanding of these errors would help us not only to build accurate models but also to avoid the mistake of overfitting and underfitting.
+
+Bias is the difference between the average prediction of our model and the correct value which we are trying to predict.
+Model with high bias pays very little attention to the training data and oversimplifies the model.
+It always leads to high error on training and test data.
+
+Variance is the variability of model prediction for a given data point or a value which tells us spread of our data.
+Model with high variance pays a lot of attention to training data and does not generalize on the data which it hasn’t seen before.
+As a result, such models perform very well on training data but has high error rates on test data.
+
+In supervised learning, underfitting happens when a model is unable to capture the underlying pattern of the data.
+These models usually have high bias and low variance.
+It happens when we have very less amount of data to build an accurate model or when we try to build a linear model with a nonlinear data.
+Also, these kind of models are very simple to capture the complex patterns in data like Linear and logistic regression.
+
+In supervised learning, overfitting happens when our model captures the noise along with the underlying pattern in data.
+It happens when we train our model a lot over noisy dataset.
+These models have low bias and high variance.
+These models are very complex like Decision trees which are prone to overfitting.
+
+If our model is too simple and has very few parameters then it may have high bias and low variance.
+On the other hand if our model has large number of parameters then it’s going to have high variance and low bias.
+So we need to find the right/good balance without overfitting and underfitting the data.
+This tradeoff in complexity is why there is a tradeoff between bias and variance.
+An algorithm can’t be more complex and less complex at the same time.
+
+To build a good model, we need to find a good balance between bias and variance such that it minimizes the total error.
+	Total Error = Bias^2 + Variance + Irreducible Error
+
+An optimal balance of bias and variance would never overfit or underfit the model.
+Therefore understanding bias and variance is critical for understanding the behavior of prediction models.
+
+
+(Q) How do we know if a model is performing well ?
+A machine learning model’s performance is considered good based on it prediction and how well it generalizes on an independent test dataset.
+Based on the performance of different models we choose the model which ranks highest in performance.
+
+Let’s understand this with an example, let’s say we want to predict as to who will do well in the Midterm election of 2018, will it Republican or Democrats ?
+We go to a neighborhood and start asking people if they would vote for a Democrat or a Republican.
+We interview 100 people, 44 say they will vote for Democrats, 40 say they will vote for Republican and 16 are undecided.
+Based on this data we can make a prediction that chances of Democrats winning is higher than Republicans.
+
+(Q) Can we apply this prediction to the entire county, state and then at national level ?
+No, because the prediction might change if we go to a different neighborhood or a different county or state.
+We will observe inconsistencies in the prediction.
+This means our model is not performing well as it cannot be used reliably to make predictions.
+One of the reason for our model to perform badly is due to small sample size and not having enough variation in the data.
+This introduces error in our prediction.
+Error is when the predicted value is different from the actual value.
+
+When we have an input x and we apply a function f on the input x to predict an output y.
+Difference between the actual output and predicted output is the error.
+Our goal with machine learning algorithm is to generate a model which minimizes the error of the test dataset.
+Models are assessed based on the prediction error on a new test dataset.
+
+Error in our model is summation of reducible and irreducible error.
+Errors that cannot be reduced no matter what algorithm you apply is called an irreducible error.
+It is usually caused by unknown variables that may be having an influence on the output variable.
+Reducible Error has two components — bias and variance.
+Presence of bias or variance causes overfitting or underfitting of data.
+
+Bias is how far are the predicted values from the actual values.
+If the average predicted values are far off from the actual values then the bias is high.
+High bias causes algorithm to miss relevant relationship between input and output variable.
+When a model has a high bias then it implies that the model is too simple and does not capture the complexity of data thus underfitting the data.
+
+Variance occurs when the model performs good on the trained dataset but does not do well on a dataset that it is not trained on.
+Variance tells us how scattered are the predicted value from the actual value.
+High variance causes overfitting that implies that the algorithm models random noise present in the training data.
+When a model has a high variance then the model becomes very flexible and tune itself to the data points of the training set.
+When a high variance model encounters a different data point that it has not learnt or seen, then it cannot make right prediction.
+
+High Bias Low Variance: Models are consistent but inaccurate on average
+High Bias High Variance : Models are inaccurate and also inconsistent on average
+Low Bias High variance: Models are somewhat accurate but inconsistent on averages.
+Low Bias Low Variance: Models are accurate and consistent on averages. (We strive for this in our model)
+
+High Bias can be identified when we have
+	High training error
+	Validation error or test error is same as training error
+
+High Variance can be identified when
+	Low training error
+	High validation error ot high test error
+
+High bias is due to a simple model and we also see a high training error.
+To fix that we can do following things
+	Add more input features
+	Add more complexity by introducing polynomial features
+	Decrease Regularization term
+
+High variance is due to a model that tries to fit most of the training dataset points and hence gets more complex.
+To resolve high variance issue we need to work on
+	Getting more training data
+	Reduce input features
+	Increase Regularization term
+
+Regularization is a technique where we penalize the loss function for a complex model which is very flexible. This helps with overfitting. It does this by penalizing the different parameters or weights to reduce the noise of the training data and generalize well on the test data
+Regularization significantly reduces the variance without substantially increasing bias.
+
+
