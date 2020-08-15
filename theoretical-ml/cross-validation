@@ -1,0 +1,82 @@
+
+================
+Cross-Validation
+================
+There is always a need to validate the stability of any machine learning model.
+I mean we just can’t fit the model to our training data and hope it would accurately work for the real data it has never seen before.
+We need some kind of assurance that our model has got most of the patterns from the data correct, and its not picking up too much on the noise.
+Or, in other words its low on bias and variance.
+
+The process of deciding whether the numerical results quantifying hypothesized relationships between variables, are acceptable as descriptions of the data, is known as validation. 
+Generally, an error estimation for the model is made after training, better known as evaluation of residuals.
+In this process, a numerical estimate of the difference in predicted and original responses is done, also called the training error.
+However, this only gives us an idea about how well our model does on data used to train it.
+Now its possible that the model is underfitting or overfitting the data.
+So, the problem with this evaluation technique is that it does not give an indication of how well the learner will generalize to an unseen data set.
+Getting this idea about our model is known as Cross Validation.
+
+Now a basic remedy for this involves removing a part of the training data and using it to get predictions from the model trained on rest of the data.
+The error estimation then tells how our model is doing on unseen data or the validation set.
+This is a simple kind of cross validation technique, also known as the holdout method.
+Although this method doesn’t take any overhead to compute and is better than traditional validation, it still suffers from issues of high variance.
+This is because it is not certain which data points will end up in the validation set and the result might be entirely different for different sets.
+
+
+=======================
+K-Fold Cross Validation
+=======================
+As there is never enough data to train the model, removing a part of it for validation poses a problem of underfitting.
+By reducing the training data, we risk losing important patterns or trends in data set, which in turn increases error induced by bias.
+So, what we require is a method that provides ample data for training the model and also leaves ample data for validation.
+K Fold cross validation does exactly that.
+
+In K Fold cross validation, the data is divided into k subsets.
+Now the holdout method is repeated k times, such that each time, one of the k subsets is used as the test set or validation set and the other k-1 subsets are put together to form a training set.
+The error estimation is averaged over all k trials to get total effectiveness of our model.
+As can be seen, every data point gets to be in a validation set exactly once, and gets to be in a training set k-1 times.
+This significantly reduces bias as we are using most of the data for fitting, and also significantly reduces variance as most of the data is also being used in validation set.
+Interchanging the training and test sets also adds to the effectiveness of this method.
+As a general rule and empirical evidence, K = 5 or 10 is generally preferred, but nothing’s fixed and it can take any value.
+
+
+==================================
+Stratified K-Fold Cross Validation
+==================================
+In some cases, there may be a large imbalance in the response variables.
+For example, in dataset concerning price of houses, there might be large number of houses having high price.
+Or in case of classification, there might be several times more negative samples than positive samples.
+For such problems, a slight variation in the K Fold cross validation technique is made, such that each fold contains approximately the same percentage of samples of each target class.
+As the complete set, or in case of prediction problems, the mean response value is approximately equal in all the folds.
+This variation is known as Stratified K Fold.
+
+Above explained validation techniques are also referred to as Non-exhaustive cross validation methods.
+These do not compute all ways of splitting the original sample, we just have to decide how many subsets need to be made.
+Also, these are approximations of Exhaustive Methods, that computes all possible ways the data can be split into training and test sets.
+
+
+============================
+Leave-P-Out Cross Validation
+============================
+This approach leaves p data points out of training data.
+So if there are n data points in the original sample then, n-p samples are used to train the model and p points are used as the validation set.
+This is repeated for all combinations in which original sample can be separated this way, and then the error is averaged for all trials, to give overall effectiveness.
+This method is exhaustive in the sense that it needs to train and validate the model for all possible combinations and for moderately large p, it can become computationally infeasible.
+A particular case of this method is when p = 1. This is known as Leave one out cross validation.
+This method is generally preferred over the previous one because it does not suffer from the intensive computation, as number of possible combinations is equal to number of data points in original sample or n.
+
+Cross Validation is a very useful technique for assessing the effectiveness of the machine learning model, particularly in cases where we need to mitigate overfitting.
+It is also of use in determining the hyperparameters of our model, in the sense that which parameters will result in lowest test error.
+
+
+======================
+Adversarial Validation
+======================
+When dealing with real datasets, there are often cases where the testing and training sets are very different.
+As a result, the internal cross-validation techniques might give scores that are not even in the ballpark of the test score.
+In such cases, adversarial validation offers an interesting solution.
+
+The general idea is to check the degree of similarity between training and tests in terms of feature distribution.
+If It does not seem to be the case, we can suspect they are quite different.
+This intuition can be quantified by combining train and test sets, assigning 0/1 labels (0 – train, 1-test) and evaluating a binary classification task.
+
+
