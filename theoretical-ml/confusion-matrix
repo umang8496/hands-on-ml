@@ -1,0 +1,116 @@
+
+===============
+Confusion Matix
+===============
+When we get the data, after data cleaning, pre-processing and wrangling, the first step we do is to feed it to an outstanding model and of course, get output in probabilities.
+But hold on! How in the hell can we measure the effectiveness of our model.
+Better the effectiveness, better the performance and that’s exactly what we want.
+And it is where the Confusion matrix comes into the play. Confusion Matrix is a performance measurement for machine learning classification.
+
+It is a performance measurement for machine learning classification problem where output can be two or more classes.
+It is a table with 4 different combinations of predicted and actual values.
+It is extremely useful for measuring Recall, Precision, Specificity, Accuracy and most importantly AUC-ROC Curve.
+
+A confusion matrix is a table that is often used to describe the performance of a classification model or classifier on a set of testing data for which the true values are known.
+The confusion matrix itself is relatively simple to understand, but the related terminology can be confusing.
+
+Let's now define the most basic terms, which are whole numbers:
+	True Positives: A true positive is an outcome where the model correctly predicts the positive class.
+	False Positives: A false positive is an outcome where the model incorrectly predicts the positive class.
+	True Negatives: A true negative is an outcome where the model correctly predicts the negative class.
+	False Negatives: A alse negative is an outcome where the model incorrectly predicts the negative class.
+
+Accuracy: Overall, how often is the classifier correct ?
+	((TP+TN)/total))
+
+Misclassification Rate: Overall, how often is it wrong ?
+	((FP+FN)/total)
+	It is also known as "Error Rate"
+
+Accuracy + Misclassification Rate = 1
+
+True Positive Rate: When it's actually yes, how often does it predict yes ?
+	(TP/actual yes) or (TP/(TP+FN))
+	It is also known as "Sensitivity" or "Recall"
+	Out of all the positive classes, how much we predicted correctly. It should be high as possible.
+
+False Positive Rate: When it's actually no, how often does it predict yes ?
+	(FP/actual no)
+
+True Negative Rate: When it's actually no, how often does it predict no ?
+	(TN/actual no)
+	It is also known as "Specificity"
+
+Precision: When it predicts yes, how often is it correct ?
+	(TP/(TP+FP))
+	Out of all the positive classes we have predicted correctly, how many are actually positive.
+
+Prevalence: How often does the yes condition actually occur in our sample ?
+	(actual yes/total)
+
+Null Error Rate
+	This is how often we would be wrong if we always predicted the majority class.
+	This can be a useful baseline metric to compare our classifier against.
+	However, the best classifier for a particular application will sometimes have a higher error rate than the null error rate.
+
+Accuracy Paradox
+	It is the paradoxical finding that accuracy is not a good metric for predictive models when classifying in predictive analytics.
+	This is because a simple model may have a high level of accuracy but be too crude to be useful.
+	For example, if the incidence of category A is dominant, being found in 99% of cases, then predicting that every case is category A will have an accuracy of 99%.
+	Precision and recall are better measures in such cases.
+	The underlying issue is that there is a class imbalance between the positive class and the negative class.
+	Prior probabilities for these classes need to be accounted for in error analysis.
+	Precision and recall help, but precision too can be biased by very unbalanced class priors in the test sets.
+
+F-Score
+	It is difficult to compare two models with low precision and high recall or vice versa.
+	So to make them comparable, we use F-Score.
+	F-score helps to measure Recall and Precision at the same time.
+	It uses Harmonic Mean in place of Arithmetic Mean by punishing the extreme values more.
+	This is a weighted average of the true positive rate (recall) and precision.
+
+	F-Score = ((2*recall*precision)/(recall+precision))
+	F-Score = ((TP)/(TP+(1/2)*(FP+FN)))
+
+
+===========================
+Sensitivity and Specificity
+===========================
+When developing diagnostic tests or evaluating results, it is important to understand how reliable those tests and the results we obtained are.
+By using samples of known disease status, values such as sensitivity and specificity can be calculated that allow us to evaluate just that.
+
+The sensitivity of a test is also called the true positive rate (TPR) and is the proportion of samples that are genuinely positive that give a positive result using the test in question.
+For example, a test that correctly identifies all positive samples in a panel is very sensitive.
+Another test that only detects 60 % of the positive samples in the panel would be deemed to have lower sensitivity as it is missing positives and giving higher a false negative rate (FNR).
+Also referred to as type II errors, false negatives are the failure to reject a false null hypothesis (the null hypothesis being that the sample is negative).
+
+The specificity of a test, also referred to as the true negative rate (TNR), is the proportion of samples that test negative using the test in question that are genuinely negative.
+For example, a test that identifies all healthy people as being negative for a particular illness is very specific.
+Another test that incorrectly identifies 30 % of healthy people as having the condition would be deemed to be less specific, having a higher false positive rate (FPR).
+Also referred to as type I errors, false positives are the rejection of a true null hypothesis (the null hypothesis being that the sample is negative).
+
+	Sensitivity = (TP/(TP+FN))
+	Specificity = (TN/(TN+FP))
+
+The positive predictive value (PPV) is the probability that a subject/sample that returns a positive result really is positive.
+The negative predictive value (NPV) is the probability that a subject/sample that returns a negative result really is negative.
+This sort of information can be very useful for discussing results with a patient for example, evaluating the reliability of any test they may have had.
+The same values used to calculate the sensitivity and specificity are also used to calculate the positive and negative predictive values.
+One way to look at it is that the sensitivity and specificity evaluate the test, whereas the PPV and NPV evaluate the results.
+
+The complementary value to the PPV is the false discovery rate (FDR), the complementary value of the NPV is the false omission rate (FOR) and equates to 1 minus the PPV or NPV respectively.
+The FDR is the proportion of results or “discoveries” that are false.
+The FOR is the proportion of false negatives which are incorrectly rejected.
+Essentially, the higher the PPV and NPV are, the lower the FDR and FOR will be - which is good news for the reliability of your test results.
+
+How should I balance sensitivity with specificity ?
+Where results are given on a sliding scale of values, rather than a definitive positive or negative, sensitivity and specificity values are especially important.
+They allow us to determine where to draw cut-offs for calling a result positive or negative, or maybe even suggest a grey area where a retest would be recommended.
+For example, by putting the cutoff for a positive result at a very low level we may capture all positive samples, and so the test is very sensitive.
+However, this may mean many samples that are actually negative could be regarded as positive, and so the test would be deemed to have poor specificity. Finding a balance is therefore vital for an effective and usable test.
+
+Using a receiver operating characteristic (ROC) curve can help to hit that sweet spot and balance false negatives with false positives.
+However, the context is also important as to whether false negatives are less problematic than false positives, or vice versa.
+For example, if it is imperative that all positives are identified – for example, in a matter of life and death, then we may be willing to tolerate a higher number of false positives to avoid missing any.
+
+
