@@ -1,0 +1,52 @@
+
+
+=====================================================================
+Receiver Operating Characteristics(ROC) and Area Under ROC Curve(AUC)
+=====================================================================
+An ROC curve (receiver operating characteristic curve) is a graph showing the performance of a classification model at all classification thresholds.
+This curve plots two parameters:
+	True Positive Rate  (TPR) = (TP/(TP+FN))
+	False Positive Rate (FPR) = (FP/(FP+TN))
+
+An ROC curve plots TPR v/s FPR at different classification thresholds.
+Lowering the classification threshold classifies more items as positive, thus increasing both False Positives and True Positives. 
+
+To compute the points in an ROC curve, we could evaluate a logistic regression model many times with different classification thresholds, but this would be inefficient.
+Fortunately, there's an efficient, sorting-based algorithm that can provide this information for us, called AUC.
+AUC stands for "Area under the ROC Curve."
+That is, AUC measures the entire two-dimensional area underneath the entire ROC curve (think integral calculus) from (0,0) to (1,1).
+
+AUC provides an aggregate measure of performance across all possible classification thresholds.
+One way of interpreting AUC is as the probability that the model ranks a random positive example more highly than a random negative example.
+AUC ranges in value from 0 to 1. A model whose predictions are 100% wrong has an AUC of 0.0; one whose predictions are 100% correct has an AUC of 1.0.
+
+In Machine Learning, performance measurement is an essential task. So when it comes to a classification problem, we can count on an AUC-ROC Curve.
+When we need to check or visualize the performance of the multiclass classification problem, we use AUC-ROC curve.
+It is one of the most important evaluation metrics for checking any classification model’s performance.
+
+(Q) What is AUC - ROC Curve ?
+AUC-ROC curve is a performance measurement for classification problem at various thresholds settings.
+ROC is a probability curve and AUC represents degree or measure of separability.
+It tells how much model is capable of distinguishing between classes.
+Higher the AUC, better the model is at predicting 0s as 0s and 1s as 1s.
+The ROC curve is plotted with TPR against the FPR where TPR is on y-axis and FPR is on the x-axis.
+
+(Q) How to speculate the performance of the model ?
+An excellent model has AUC near to the 1 which means it has good measure of separability.
+A poor model has AUC near to the 0 which means it has worst measure of separability.
+
+When two curves don’t overlap at all means model has an ideal measure of separability.
+It is perfectly able to distinguish between positive class and negative class.
+This is an ideal situation.
+
+When two distributions overlap, we introduce type 1 and type 2 error.
+Depending upon the threshold, we can minimize or maximize them.
+When AUC is 0.7, it means there is 70% chance that model will be able to distinguish between positive class and negative class.
+
+When AUC is approximately 0.5, model has no discrimination capacity to distinguish between positive class and negative class.
+This is the worst situation.
+
+When AUC is approximately 0, model is actually reciprocating the classes.
+It means, model is predicting negative class as a positive class and vice versa.
+
+
