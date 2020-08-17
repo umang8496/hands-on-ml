@@ -109,7 +109,8 @@ To resolve high variance issue we need to work on
 	Reduce input features
 	Increase Regularization term
 
-Regularization is a technique where we penalize the loss function for a complex model which is very flexible. This helps with overfitting. It does this by penalizing the different parameters or weights to reduce the noise of the training data and generalize well on the test data
+Regularization is a technique where we penalize the loss function for a complex model which is very flexible. This helps with overfitting.
+It does this by penalizing the different parameters or weights to reduce the noise of the training data and generalize well on the test data
 Regularization significantly reduces the variance without substantially increasing bias.
 
 

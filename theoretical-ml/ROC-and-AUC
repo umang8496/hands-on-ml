@@ -11,6 +11,8 @@ This curve plots two parameters:
 An ROC curve plots TPR v/s FPR at different classification thresholds.
 Lowering the classification threshold classifies more items as positive, thus increasing both False Positives and True Positives. 
 
+For ROC curve, we plot a graph between TPR(Sensitivity) on y-axis and FPR(1-Specificity) on x-axis.
+
 To compute the points in an ROC curve, we could evaluate a logistic regression model many times with different classification thresholds, but this would be inefficient.
 Fortunately, there's an efficient, sorting-based algorithm that can provide this information for us, called AUC.
 AUC stands for "Area under the ROC Curve."
