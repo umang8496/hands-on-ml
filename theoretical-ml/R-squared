@@ -1,0 +1,174 @@
+
+(Q) What is R-squared (R²) ?
+The R-squared statistic quantifies the predictive accuracy of a statistical model.
+It shows the proportion of variance in the outcome variable that is explained by the predictions.
+It is also known as the coefficient of determination, R², r², and r-square.
+
+R-squared or R² has a value in the range of 0 through to 1.
+A value of 1 indicates that predictions are identical to the observed values; it is not possible to have a value of R² of more than 1.
+A value of 0 indicates that there is no linear relationship between the observed and predicted values;
+Here “linear” in this context means that it is still possible that there is a non-linear relationship between the observed and predicted values.
+Finally, a value of 0.5 means that half of the variance in the outcome variable is explained by the model.
+Sometimes the R² is presented as a percentage.
+
+There are many equivalent ways of computing R². Perhaps the simplest is:
+	R² = (Explained-sum-of-squares / Total-sum-of-squares)
+
+R² has two main uses.
+One is to provide a basic summary of how well a model fits the data.
+If R² is only 0.1, then in an absolute sense the R² is only explaining a tenth of what can be explained.
+Similarly, an R² of .99 is explaining almost all that can be explained.
+
+The other main application of R² is to compare models. All else being equal, a model with a higher R² is a better model.
+
+A common misunderstanding of R² is that there is a threshold.
+For example, a model needs to have an R² of more than 0.9 to be good.
+This is rarely true: for example, a model that predicts that future share prices may be able to earn billions of dollars in profits for a hedge fund even if the R² is only 0.01.
+
+R² can is also problematic when comparing models.
+In the case of regression, for example, if we add an extra predictor the R² will almost always increase.
+Therefore, while it is common for researchers to have a look at R² when comparing models, more sophisticated methods (statistical tests, information criteria) should be used most of the time.
+
+There are a number of variants of R².
+The most well-known is the Adjusted R² Statistic, which is designed to make it possible to compare R² across models with different numbers of predictors. 
+Various pseudo-R² statistics have been developed for models for categorical outcome variables.
+
+
+The R-Squared statistic is a number between 0 and 1, or, 0% and 100%, that quantifies the variance explained in a statistical model.
+Unfortunately, R-Squared comes under many different names.
+It is the same thing as r-squared, R-square, the coefficient of determination, variance explained, the squared correlation, r2, and R2.
+
+01. Don't conclude a model is "good" based on the R-squared
+The basic mistake that people make with R-squared is to try and work out if a model is "good" or not, based on its value.
+There are two flavors of this question:
+	"My R-Squared is 75%. Is that good ?"
+	"My R-Squared is only 20%; I was told that it needs to be 90%".
+
+The problem with both of these questions it that it is just a bit silly to work out if a model is good or not based on the value of the R-Squared statistic.
+Sure it would be great if we could check a model by looking at its R-Squared, but it makes no sense to do so.
+It is pretty common to develop rules of thumb.
+For example, in driver analysis, models often have R-Squared values of around 0.20 to 0.40.
+But, keep in mind, that even if we are doing a driver analysis, having an R-Squared in this range, or better, does not make the model valid.
+
+02. Use R-Squared to work out overall fit
+Sometimes people take point 1 a bit further, and suggest that R-Squared is always bad.
+Or, that it is bad for special types of models (don't use R-Squared for non-linear models).
+This is a case of throwing the baby out with the bath water.
+There are quite a few caveats, but as a general statistic for summarizing the strength of a relationship, R-Squared is awesome.
+All else being equal, a model that explained 95% of the variance is likely to be a whole lot better than one that explains 5% of the variance, and likely will produce much, much better predictions.
+
+03. Plot the data
+When interpreting the R-Squared it is almost always a good idea to plot the data.
+That is, create a plot of the observed data and the predicted values of the data.
+This can reveal situations where R-Squared is highly misleading.
+For example, if the observed and predicted values do not appear as a cloud formed around a straight line, then the R-Squared, and the model itself, will be misleading.
+Similarly, outliers can make the R-Squared statistic be exaggerated or be much smaller than is appropriate to describe the overall pattern in the data.
+
+04. Be very afraid if you see a value of 0.9 or more
+Such high values always mean that something is wrong, usually seriously wrong.
+
+05. Take context into account
+There are a lot of different factors that can cause the value to be high or low.
+This makes it dangerous to conclude that a model is good or bad based solely on the value of R-Squared.
+For example:
+When our predictor or outcome variables are categorical or counts, the R-Squared will typically be lower than with truly numeric data.
+The more true noise in the data, the lower the R-Squared.
+When we have more observations, the R-Squared gets lower.
+When we have more predictor variables, the R-Squared gets higher.
+If the data is not a simple random sample the R-Squared can be inflated.
+When our model excludes variables that are obviously important, the R-Squared will necessarily be small.
+
+06. Don't use R-Squared to compare models
+A natural thing to do is to compare models based on their R-Squared statistics.
+If one model has a higher R-Squared value, surely it is better ?
+This is, as a pretty general rule, an awful idea.
+
+There are two different reasons for this:
+	In many situations the R-Squared is misleading when compared across models.
+	Examples include comparing a model based on aggregated data with one based on disaggregate data, or models where the variables are being transformed.
+
+	Even in situations where the R-Squared may be meaningful, there are always better tools for comparing models.
+	These include F-Tests, Bayes' Factors, Information Criteria, and out-of-sample predictive accuracy.
+
+
+===========
+Adjusted R²
+===========
+R² is the ratio of the explained variance to the total variance.
+On adding a new variable the explained variance and hence the value of R² will increase, or at least, will not decrease.
+However, this does not at all mean that the model with the added variable is better than the model without it.
+R² can be misleading if used to compare models with a different number of predictors.
+
+Adjusted R² is a modified version of R² adjusted with the number of predictors.
+It penalizes for adding unnecessary features and allows a comparison of regression models with a different number of predictors.
+
+Adjusted-R² = 1 - (1-R²)*((n-1)/n-k-1)
+Where
+	k = number of explanatory variables in the model and 
+	n = number of observations
+
+The value of Adjusted-R² is always less than that of R².
+
+The adjusted R-squared increases only if the new term improves the model more than would be expected by chance.
+It decreases when a predictor improves the model by less than expected by chance.
+
+Also, note that the value of adjusted R² can be negative.
+Obtaining a negative value for Adjusted R² can indicate few or all of the following:
+	The linear model is a poor fit for the data
+	The number of predictors is large
+	The number of samples is small
+
+
+============================
+R² and Adjusted R² in Python
+============================
+Generate a random dataset first.
+	from sklearn.datsets import make_regression
+	X,Y = make_regression(n_samples=20, n_features=6, random_state=2, noise=0.5)
+	# Here X is a list of 6 elements.
+
+Let us fit a line using Ordinary Least Squares Regression between Y and one element from X (X[4]) using the statsmodels library in Python.
+The summary() function can be used to view the R² and Adjusted R² coefficients.
+	import statsmodels.api as sm
+	model = sm.OLS(Y, X[:,4]).fit()
+	model.summary()
+
+It could give an R-squared value of 0.443 & an adjusted-R-squared value of 0.414
+
+We can also use r2_score() from the metrics module in sklearn.
+However, there is no such function to find the adjusted r2_score. We need to use its formula to calculate it.
+
+	# import dataset
+	import pandas as pd
+	data = pd.read_csv('mtcars.csv')
+
+	# remove string and categorical variables
+	cat_var = ['model', 'cyl', 'vs', 'am', 'gear', 'carb']
+	data = data.drop(cat_var, axis = 1)
+
+	# scale the variables to prevent coefficients from becoming too large or too small
+	from sklearn.preprocessing import MinMaxScaler
+	scaler = MinMaxScaler()
+	data = scaler.fit_transform(data)
+
+	# fit the linear regression model to predict mpg as a function of other variables
+	from sklearn.linear_model import LinearRegression
+	reg = LinearRegression()
+	model = reg.fit(data[:, 1:5], data[:, 0])
+
+	# calculate r2 score
+	from sklearn.metrics import r2_score
+	r2 = r2_score(model.predict(data[:, 1:5]), data[:, 0])
+
+	# adjusted r2 using formula adj_r2 = 1 - (1- r2) * (n-1) / (n - k - 1)
+	# k = number of predictors = data.shape[1] - 1
+	adj_r2 = 1 - (1-r2)*(len(data) - 1) / (len(data) - (data.shape[1] - 1) - 1)
+	print(r2, adj_r2)
+
+It gives the following output:
+	0.806153 0.768875
+
+Although both R² and adjusted R² are measures of goodness of fit, linear regression models should not be built with the sole goal of maximizing these coefficients.
+This will eventually tempt us to introduce many insignificant predictors in our model. As a result, our model will be inaccurate and unreliable.
+
+
