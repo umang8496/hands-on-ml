@@ -1,0 +1,58 @@
+
+==========================================
+Standard Error of Regression v/s R-squared
+==========================================
+
+The standard error of the regression (S) and R-squared are two key goodness-of-fit measures for regression analysis.
+While R-squared is the most well-known amongst the goodness-of-fit statistics, it is a bit over-hyped.
+
+We can find the standard error of the regression (standard error of the estimate), near R-squared in the goodness-of-fit section of most statistical output.
+Both of these measures give us a numeric assessment of how well a model fits the sample data.
+
+However, there are differences between the two statistics.
+	The standard error of the regression provides the absolute measure of the typical distance that the data points fall from the regression line.
+	S is in the units of the dependent variable.
+
+	R-squared provides the relative measure of the percentage of the dependent variable variance that the model explains.
+	R-squared can range from 0 to 100%.
+
+An analogy makes the difference very clear.
+Suppose we’re talking about how fast a car is traveling.
+R-squared is equivalent to saying that the car went 80% faster.
+That sounds a lot faster! However, it makes a huge difference whether the initial speed was 20 MPH or 90 MPH.
+The increased velocity based on the percentage can be either 16 MPH or 72 MPH, respectively.
+If we need to know exactly how much faster, the relative measure just isn’t going to tell us.
+The standard error of the regression is equivalent to telling us directly how many MPH faster the car is traveling.
+The car went 72 MPH faster. Now that’s impressive!
+
+Let’s move on to how we can use these two goodness-of-fits measures in regression analysis.
+The standard error of the regression has several advantages.
+It tells us straight up how precise the model’s predictions are using the units of the dependent variable.
+This statistic indicates how far the data points are from the regression line on average.
+We want lower values of SE because it signifies that the distances between the data points and the fitted values are smaller.
+SE is also valid for both linear and nonlinear regression models.
+This fact is convenient if we need to compare the fit between both types of models.
+
+For R-squared, we want the regression model to explain higher percentages of the variance.
+Higher R-squared values indicate that the data points are closer to the fitted values.
+While higher R-squared values are good, they don’t tell us how far the data points are from the regression line.
+Additionally, R-squared is valid for only linear models.
+We can’t use R-squared to compare a linear model to a nonlinear model.
+
+R-squared is a percentage, which seems easy to understand.
+However, the standard error of the regression a bit more intuitive.
+It gives a concrete insight provided by using the original units of the dependent variable.
+If we are using the regression model to produce predictions, SE tells us at a glance if the model is sufficiently precise.
+
+On the other hand, R-squared doesn’t have any units, and it feels more ambiguous than SE.
+If all we know is that R-squared is 76.1%, we don’t know how wrong the model is on average.
+We do need a high R-squared to produce precise predictions, but we don’t know how high it must be exactly.
+It’s impossible to use R-squared to evaluate the precision of the predictions.
+
+
+For more details
+Watch the following videos
+https://www.youtube.com/watch?v=w2FKXOa0HGA&list=PLF596A4043DBEAE9C&index=4&t=0s
+https://www.youtube.com/watch?v=r-txC-dpI-E&list=PLF596A4043DBEAE9C&index=4
+
+
