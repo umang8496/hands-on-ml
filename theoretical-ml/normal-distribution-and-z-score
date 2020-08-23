@@ -1,0 +1,116 @@
+
+========================================
+The idea of Probability Density Function
+========================================
+Let's do a thought experiment, Let's think of a number X, between 0 and 10 (both inclusive).
+Now if nothing else is given then the probability of X being a number '4' or  P(X=4) is 1/11, as there are 11 numbers in our sample space.
+
+But, there was nothing that forces us to conclude that we could only think of an intger.
+May be we can think of 1/2, or 1/4, or 7/8.
+Once we start going down that road, the possibilities are endless.
+We could be thinking of any fraction between 0 and 1.
+But who said we were limiting ourselves to rational numbers ?
+We could even be thinking of irrational numbers like 1/√2 or π/5.
+If we allow the possibility that the number X could any real number in the interval [0,1], then there are clearly an infinite number of possibilities.
+
+Since we don't want to assume that we are favoring any particular number, then we should insist that the probability is the same for each number.
+In other words, the probability that the random number X is any particular number x∈[0,1] should be some constant value;
+Let's use 'c' to denote this probability of any single number.
+But, now we run into trouble due to the fact that there are an infinite number of possibilities.
+If each possibility has the same probability 'c' and the probabilities must add up to 1 and there are an infinite number of possibilities, then what could the individual probability 'c' possibly be ?
+If 'c' were any finite number greater than zero, once we add up an infinite number of the c's, we must get to infinity, which is definitely larger than the required sum of 1.
+In order to prevent the sum from blowing up to infinity, we must have 'c' be infinitesimally small. We must insist that c=0.
+The probability that we choose particular number, such as the probability that X equals 1/2, must be equal to zero.
+We can write this as   Pr(X=x)=0   for any real number x.
+
+It turns out, for the case where we allow X to be any real number, we are just approaching the question in the wrong way.
+We should not ask for the probability that X is exactly a single number (since that probability is zero).
+Instead, we need to think about the probability that x is close to a single number.
+
+We capture the notion of being close to a number with a probability density function which is often denoted by ρ(x).
+If the probability density around a point x is large, that means the random variable X is likely to be close to x.
+If, on the other hand, ρ(x)=0 in some interval, then X won't be in that interval.
+
+To translate the probability density ρ(x) into a probability, imagine that Ix is some small interval around the point x.
+Then, assuming ρ is continuous, the probability that X is in that interval will depend both on the density ρ(x) and the length of the interval.
+
+
+===================
+Normal Distribution
+===================
+The normal distribution is the most important probability distribution in statistics because it fits many natural phenomena.
+The normal distribution is a probability function that describes how the values of a variable are distributed.
+It is a symmetric distribution where most of the observations cluster around the central peak and 
+the probabilities for values further away from the mean taper off equally in both directions.
+Extreme values in both tails of the distribution are similarly unlikely.
+
+The mean is the central tendency of the distribution. It defines the location of the peak for normal distributions.
+Most values cluster around the mean.
+
+The standard deviation is a measure of variability. It defines the width of the normal distribution.
+The standard deviation determines how far away from the mean the values tend to fall.
+It represents the typical distance between the observations and the average.
+
+Despite the different shapes, all forms of the normal distribution have the following characteristic properties.
+	They’re all symmetric. The normal distribution cannot model skewed distributions.
+	The mean, median, and mode are all equal.
+	Half of the population is less than the mean and half is greater than the mean.
+
+Empirical Rule for the Normal Distribution
+	Mean +/- Std Devs        Percentage of data contained
+		1						68%
+		2						95%
+		3						99.7%
+
+
+============================
+Standard Normal Distribution
+============================
+The normal distribution has many different shapes depending on the parameter values.
+However, the standard normal distribution is a special case of the normal distribution where the mean is zero and the standard deviation is 1.
+This distribution is also known as the Z-distribution.
+
+A value on the standard normal distribution is known as a standard score or a Z-score.
+A standard score represents the number of standard deviations above or below the mean that a specific observation falls.
+For example, a standard score of 1.5 indicates that the observation is 1.5 standard deviations above the mean.
+On the other hand, a negative score represents a value below the average. The mean has a Z-score of 0.
+
+Standard scores are a great way to understand where a specific observation falls relative to the entire distribution.
+They also allow us to take observations drawn from normally distributed populations that have different means and standard deviations and place them on a standard scale.
+This standard scale enables you to compare observations that would otherwise be difficult.
+This process is called standardization, and it allows us to compare observations and calculate probabilities across different populations.
+In other words, it permits you to compare apples to oranges. Isn’t statistics great!
+To standardize our data, we need to convert the raw measurements into Z-scores.
+To calculate the standard score for an observation, take the raw measurement, subtract the mean, and divide by the standard deviation.
+
+Mathematically, the formula for that process is the following:
+	Z = ((X - mean)/std.dev)
+
+In statistics, standardization is the process of putting different variables on the same scale.
+This process allows us to compare scores between different types of variables.
+Typically, to standardize variables, we calculate the mean and standard deviation for a variable.
+Then, for each observed value of the variable, we subtract the mean and divide by the standard deviation.
+
+This process produces standard scores that represent the number of standard deviations above or below the mean that a specific observation falls.
+For instance, a standardized value of 2 indicates that the observation falls 2 standard deviations above the mean.
+This interpretation is true regardless of the type of variable that we standardize.
+
+
+============================
+Probability Density function
+============================
+PDF is used to define the probability of the random variable coming within a distinct range of values, as objected to taking on anyone value.
+The function explains the probability density function of normal distribution and how mean and deviation exists.
+The standard normal distribution is used to create a database or statistics, which are often used in science to represent the real-valued variables, whose distribution are not known.
+
+PDF is the probability function which is represented for the density of a continuous random variable lying between a certain range of values.
+It is also called a probability distribution function or just a probability function.
+However, this function is stated as the function over a general set of values or sometimes it is referred to as Cumulative Distribution Function or sometimes as Probability Mass Function.
+But the actual truth is PDF is defined for continuous random variables whereas PMF is defined for discrete random variables.
+
+The PDF is defined in the form of an integral of the density of the variable density over a given range.
+It is denoted by f(x).
+This function is positive or non-negative at any point of the graph and the integral of PDF over the entire space is always equal to one.
+	P(a < X < b) = ∫f(x) (from a to b)
+
+
