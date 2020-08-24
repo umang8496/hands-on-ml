@@ -1,0 +1,98 @@
+
+=================================================
+Probabilistic Interpretation of Linear Regression
+=================================================
+The basic idea behind regression is that we want to model the relationship between a variable y (dependent variable, endogenous variable, response variable),
+and a vector of explanatory variables x=(x1,x2,…,xn) (independent variables, exogenous variables, covariates, features, or input variables).
+A linear regression relates y to a linear predictor function of x.
+
+For a given data point i, the linear function is of the form:
+	f(i) = β0 + β1*x(i1) + β2*x(i2) + ... + βp*x(ip)
+
+There are usually two main reasons to use a regression model:
+	Predicting a future value of y given its corresponding explanatory variables.
+	Quantifying the strength of the relationship of y in terms of its explanatory variables.
+
+The simplest form of linear regression model equates the outcome variable with the linear predictor function,
+adding an error term (ε) to model the noise that appears when fitting the model.
+The error term is added because the y variable almost never can be exactly determined by x, there is always some noise or uncertainty in the relationship.
+	y(i)  = β0 + β1*x(i1) + β2*x(i2) + ... + βp*x(ip) + ε(i)
+
+
+=============================================
+Modeling the Outcome as a Normal Distribution
+=============================================
+Instead of starting off with both y and x variables, lets start by describing the probability distribution of just y and then introducing the relationship to the explanatory variables.
+
+First, let's model y as a standard normal distribution with a zero (known) mean and unit variance.
+Note this does not depend on any explanatory variables (no x's anywhere to be seen):	Y ∼ N(0,1)
+
+In this model for y, we have nothing to estimate, all the normal distribution parameters are already set (mean μ=0, variance σ2=1).
+In the language of linear regression, this model would be represented as y = 0 + ε, with no dependence on any x values and ε being a standard normal distribution.
+Note that even though on average we expect y=0, we still expect a certain amount of fluctuation or randomness about the 0.
+
+Next, let's make it a little bit more interesting by assuming a fixed unknown mean and variance σ2 corresponding to y = μ + ε regression model.
+	Y ∼ N(μ,σ2)
+
+We are still not modeling the relationship between y and x.
+In the last equation, if we're given a set of (yi,xi), we can get an unbiased estimate for μ of y, by just using the mean of all the yi's.
+A more round about (but more insightful) way to find this estimate is to maximize the likelihood function.
+
+In statistics, the likelihood function measures the goodness of fit of a statistical model to a sample of data for given values of the unknown parameters.
+It is formed from the joint probability distribution of the sample, but viewed and used as a function of the parameters only, thus treating the random variables as fixed at the observed values.
+
+The likelihood function is usually defined differently for discrete and continuous probability distributions.
+
+Likelihood Function for Discrete Probability Distribution
+	Let X be a discrete random variable with probability mass function p depending on a parameter 0.
+	Then the function
+		L(0|x) = p0(x) = P0(X=x)
+	considered as a function of 0, is the likelihood function, given the outcome x of the random variable X.
+
+Likelihood Function for Continuous Probability Distribution
+	Let X be a random variable following an absolutely continuous probability distribution with density function f depending on a parameter 0.
+	Then the function
+		L(0|x) = f0(x)
+	considered as a function of 0, is the likelihood function of 0, given the outcome x of X.
+
+
+=====================
+Maximizing Likelihood
+=====================
+Consider that we have n points, each of which is drawn in an independent and identically distributed (IID) way from the normal distribution.
+For a given, μ and σ2, 
+the probability of those n points being drawn define the likelihood function, which are just the multiplication of n normal PDF (because they are independent).
+
+	L(μ|y) = ∏i P(y|μ,σ2) = ∏i * (1/σ√2π) * exp(-(yi - μ)^2/(2*σ2))
+	where
+		σ  = standard deviation for yi
+		σ2 = variance for yi
+		∏i = product of n terms
+
+Once we have a likelihood function, a good estimate of the parameters (μ,σ2) is to find the combination of parameters that maximizes this function for the given data points.
+In this scenario, the data points are fixed (we have observed n of them with known values) and we are trying to estimate the unknown values for μ (or σ2). 
+Here we derive the maximum likelihood estimate for μ:
+	μ = arg max L(μ|y)
+	  = arg max ∏i P(y|μ,σ2)
+	  = arg max log(∏i P(y|μ,σ2))
+	  = arg max ∑ log(1/σ√2π) + log(exp(-(yi - μ)^2/(2*σ2)))
+	  = arg max ∑ log(exp(-(yi - μ)^2/(2*σ2)))
+	  = arg max ∑ (-(yi - μ)^2/(2*σ2))
+	  = arg min ∑ (yi - μ)^2
+
+It turns out maximizing the likelihood is the same as maximizing the log-likelihood, and it makes the manipulation much easier.
+Also, we can remove any additive or multiplicative constants where appropriate because they do not affect the maximum likelihood value.
+
+To find the actual value of the optimum point, we can take the partial derivative of last equation wrt μ and set it to zero:
+	∂/∂μ (log(L(μ|y))) = 0
+	∂/∂μ (∑ (yi - μ)^2) = 0
+	∑ -2(yi - μ) = 0
+	∑ (yi - μ) = 0
+	nμ = ∑ (yi)
+	μ = (1/n) * ∑ (yi)
+
+Which is precisely the mean of the y values as expected.
+Even though we knew the answer ahead of time, this work will be useful once we complicate the situation by introducing the explanatory variables.
+Finally, the expected value of y is just the expected value of a normal distribution, which is just equal its mean.
+
+
